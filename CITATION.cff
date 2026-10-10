@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite it as below."
+title: "ColorSplit: counting n-queens solutions by splitting the board into colors"
+type: software
+authors:
+  - given-names: "Sergii"
+    family-names: "Cherepanov"
+license: MIT
+version: "1.0.0"
+date-released: "2026-10-09"
+repository-code: "https://github.com/SergeyChere/colorsplit-nqueens"
+keywords:
+  - n-queens
+  - OEIS A000170
+  - exact counting
+  - meet-in-the-middle
+  - GPU
+  - CUDA
+abstract: >-
+  Exact counting of the solutions Q(n) of the n-queens problem by splitting the board into
+  white and black squares: the two colors interact only through rows and columns, so Q(n)
+  is a sum of table lookups on an exact key. CPU versions in C and Java, a CUDA version for
+  GPUs, tools to check and merge checkpoint files, and the 4096 partial sums of Q(27).

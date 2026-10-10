@@ -1,0 +1,19 @@
+# build output
+bin/
+*.o
+*.class
+colorsplit
+colorsplit_gpu
+colorsplit_gpu_v2
+colorsplit_v2
+colorsplit_emu
+
+# files written by runs (results/ keeps the published checkpoint files)
+*.ckpt
+!results/*.ckpt
+*.time
+*.tmp
+*.log
+colorsplit.pid
+sample*.txt
+part*.txt

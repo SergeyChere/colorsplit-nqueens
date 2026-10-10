@@ -1,0 +1,4 @@
+# Store text files with LF line endings; shell scripts keep LF also in checkouts on Windows,
+# so that they still run after being copied to a Linux server or to Google Colab.
+* text=auto
+*.sh text eol=lf
