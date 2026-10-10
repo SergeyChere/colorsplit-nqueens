@@ -179,8 +179,8 @@ backtracking with the 8 board symmetries) and `java baselines/Backtracking.java 
 
 All of this research was done with the help of Claude, an AI model by Anthropic. The ideas are
 the author's: splitting the board by color, the parity law, the mirror reductions for odd boards,
-checking chunks by recomputing them with the other table side, and most of the ideas that were
-tested and did not help. Claude wrote and tested the programs, ran the experiments up to n = 21,
+the center-out row order, and checking chunks by recomputing them with the other table side.
+Claude wrote and tested the programs, ran the experiments up to n = 21,
 checked each idea against data, proposed some of the implementation techniques and drafted the
 text. The author ran all computations for n ≥ 22 on rented CPU servers and cloud GPUs and checked
 their results.
