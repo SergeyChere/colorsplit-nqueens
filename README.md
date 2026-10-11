@@ -93,6 +93,7 @@ gpu/README.md             building and running on a GPU, step by step on Google 
 baselines/                bitmask backtracking with and without symmetries, for comparison
 tools/verify.py           check, compare and merge checkpoint files (exact integers)
 tools/status.py           progress and time left of a long run
+tools/linear_laws.py      Lemma 2: no linear law beyond row and column sums for n = 9..32
 tools/run_cpu_server.sh   build and run on a fresh Linux server
 tests/run_tests.sh        self-test (make test), about a minute, no GPU needed
 tests/check_reductions.sh each reduction switched off gives the same table cells and chunk sums
