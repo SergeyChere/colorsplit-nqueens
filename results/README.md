@@ -81,7 +81,14 @@ builds the C version with compile-time switches that turn single reductions off,
   also ran n = 19);
 - with the left-right mirror switched off, all 4096 chunk sums stay identical for odd n (script:
   n = 13, 15, 17; we also ran n = 19);
+- with the half-key pruning switched off, all 4096 chunk sums stay identical (script: n = 13 to 18;
+  we also ran n = 19);
 - without the weighted transposition, the Java version (`-Dnotr=true`) still returns Q(1) to Q(16).
+
+What the half-key pruning saves: with it switched off (`-DNO_HALF_KEY`) the C version took 6.2 s
+instead of 5.2 s at n = 18, 26.0 s instead of 18.8 s at n = 19 and 168 s instead of 143 s at
+n = 20 (2 threads, the same machine for both builds, best of two runs for n = 18 and 19): it saves
+about 15% on even boards and 28% at n = 19.
 
 Largest table cell (after the weights λ and, for odd n, the mirror folding) and largest number of
 placements W_R(C) behind one key. The cells are 32-bit counters, which overflow only above

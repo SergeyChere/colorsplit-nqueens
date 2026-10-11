@@ -132,6 +132,7 @@ static const i64 REF[] = {1, 1, 0, 0, 2, 10, 4, 40, 92, 352, 724, 2680, 14200, 7
 /* Verification builds (used by tests/check_reductions.sh, never for normal runs):
  *   -DNO_EARLY_CUT  keep branches whose pairs all have weight λ = 0 (same chunk sums, slower)
  *   -DNO_MIRROR     odd n: no left-right mirror inside a row set (same chunk sums, slower)
+ *   -DNO_HALF_KEY   no half-key pruning in the probe (same chunk sums, slower)
  *   -DCHECK_CELLS   compare every table cell of weight λ > 0 with a plain enumeration that
  *                   uses neither the mirror nor the early cut (small n; runs on one thread)
  *   -DCELL_STATS    print the largest table cell and the largest W_R(C) of each n */
@@ -144,6 +145,11 @@ static const i64 REF[] = {1, 1, 0, 0, 2, 10, 4, 40, 92, 352, 724, 2680, 14200, 7
 #define MIRROR 0
 #else
 #define MIRROR 1
+#endif
+#ifdef NO_HALF_KEY
+#define HALF_KEY 0
+#else
+#define HALF_KEY 1
 #endif
 
 /* =====================================================================================
@@ -323,7 +329,7 @@ static void build(W *w, int i, u64 cols, u64 e1, u64 d2) {
  * center counts once if it is the only row, otherwise the second queen is restricted
  * to the left half and counts twice. */
 static void probe(W *w, int i, u64 cols, u64 e1, u64 d2) {
-    if (i == w->split && i > 0 && i < w->nr) {                      /* half-key pruning */
+    if (HALF_KEY && i == w->split && i > 0 && i < w->nr) {          /* half-key pruning */
         u64 kOdd = oddCols & ~(even ? rev(cols) : cols);             /* odd half of the key needed */
         if (w->halfStamp[cO(kOdd)] != w->gen) return;
     }
@@ -349,7 +355,7 @@ static void probe(W *w, int i, u64 cols, u64 e1, u64 d2) {
                 return;
             }
             /* this branch jumps straight to level 2, so do the level-1 half-key check here */
-            if (!(w->split == 1 && 1 < w->nr && w->halfStamp[cO(oddCols & ~cols)] != w->gen)) {
+            if (!(HALF_KEY && w->split == 1 && 1 < w->nr && w->halfStamp[cO(oddCols & ~cols)] != w->gen)) {
                 int r1 = w->rows[1];
                 u64 a1 = w->colMask[r1] & ~cols & ~((e1 >> (n - 1 - r1)) | (d2 >> r1)) & ((1ULL << h) - 1);
                 for (; a1; a1 &= a1 - 1) {                             /* second queen: left half only */
@@ -400,7 +406,7 @@ static void buildB(W *w, int i, u64 cols, u64 e1, u64 d2) {
 }
 static void probeW(W *w, int i, u64 cols, u64 e1, u64 d2) {
     /* half-key pruning: at level split all odd rows are placed, so cols is the odd half */
-    if (i == w->split && i > 0 && i < w->nr && w->halfStamp[cO(cols)] != w->gen) return;
+    if (HALF_KEY && i == w->split && i > 0 && i < w->nr && w->halfStamp[cO(cols)] != w->gen) return;
     if (i == w->nr) { w->acc += getW(w, full & ~cols); return; }
     int r = w->rows[i];
     u64 av = w->colMask[r] & ~cols & ~((e1 >> (n - 1 - r)) | (d2 >> r));
@@ -422,7 +428,7 @@ static void probeW(W *w, int i, u64 cols, u64 e1, u64 d2) {
                 w->acc = before + left;
                 return;
             }
-            if (!(w->split == 1 && 1 < w->nr && w->halfStamp[cO(cols)] != w->gen)) {
+            if (!(HALF_KEY && w->split == 1 && 1 < w->nr && w->halfStamp[cO(cols)] != w->gen)) {
                 int r1 = w->rows[1];
                 u64 a1 = w->colMask[r1] & ~cols & ~((e1 >> (n - 1 - r1)) | (d2 >> r1)) & ((1ULL << h) - 1);
                 for (; a1; a1 &= a1 - 1) {

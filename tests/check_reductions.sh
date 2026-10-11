@@ -7,7 +7,8 @@
 #      without the mirror and without the early cut; n = 4..15.
 #   2. Early cut switched off: identical 4096 chunk sums; n = 13..18.
 #   3. Left-right mirror switched off (odd n): identical chunk sums; n = 13, 15, 17.
-#   4. Largest table cell and largest W_R(C) for n = 10..19: the cells are 32-bit counters,
+#   4. Half-key pruning switched off: identical 4096 chunk sums; n = 13..18.
+#   5. Largest table cell and largest W_R(C) for n = 10..19: the cells are 32-bit counters,
 #      so this shows the margin before an overflow.
 #
 # Run from anywhere:  bash tests/check_reductions.sh      (or: make check-reductions)
@@ -22,8 +23,8 @@ FAILS=0
 pass() { echo "  PASS  $1"; }
 fail() { echo "  FAIL  $1"; FAILS=$((FAILS + 1)); }
 
-echo "building the normal version and four verification builds"
-for v in "" NO_EARLY_CUT NO_MIRROR CHECK_CELLS CELL_STATS; do
+echo "building the normal version and five verification builds"
+for v in "" NO_EARLY_CUT NO_MIRROR NO_HALF_KEY CHECK_CELLS CELL_STATS; do
     out="cs${v:+_$v}"
     gcc -O3 -march=native -pthread ${v:+-D$v} -o "$out" "$SRC" || exit 1
 done
@@ -37,10 +38,11 @@ else
     pass "n = 4..15: $(awk '/compared/ {s += $3} END {print s}' cells.log) cells compared, none wrong"
 fi
 
-mkdir -p base nocut nomirror
+mkdir -p base nocut nomirror nohalf
 for N in 13 14 15 16 17 18; do
     (cd base && ../cs "$N" "$N" -ckpt 1 -p 0 > /dev/null 2>&1)
     (cd nocut && ../cs_NO_EARLY_CUT "$N" "$N" -ckpt 1 -p 0 > /dev/null 2>&1)
+    (cd nohalf && ../cs_NO_HALF_KEY "$N" "$N" -ckpt 1 -p 0 > /dev/null 2>&1)
     if [ $((N % 2)) = 1 ]; then (cd nomirror && ../cs_NO_MIRROR "$N" "$N" -ckpt 1 -p 0 > /dev/null 2>&1); fi
 done
 
@@ -58,7 +60,14 @@ for N in 13 15 17; do
 done
 [ $ok = 1 ] && pass "n = 13, 15, 17: all 4096 chunk sums identical" || fail "mirror"
 
-echo "4. largest table cells (32-bit counters overflow above 4294967295)"
+echo "4. half-key pruning switched off"
+ok=1
+for N in 13 14 15 16 17 18; do
+    $VERIFY compare base/colorsplit_n$N.ckpt nohalf/colorsplit_n$N.ckpt > c.log 2>&1 && grep -q "chunks in both files: 4096" c.log || { cat c.log; ok=0; }
+done
+[ $ok = 1 ] && pass "n = 13..18: all 4096 chunk sums identical" || fail "half-key pruning"
+
+echo "5. largest table cells (32-bit counters overflow above 4294967295)"
 ./cs_CELL_STATS 10 19 -p 0 | grep "cells n=" | sed 's/^ */  /'
 
 echo

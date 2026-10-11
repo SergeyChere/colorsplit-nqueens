@@ -133,8 +133,8 @@ Without a GPU, the GPU code can be checked in CPU emulation (slow, for testing o
 make emu && ./bin/colorsplit_emu 1 14 -t 32
 ```
 
-Self-test of everything: `make test`. To check that the reductions (mirror, early cut) leave
-every table cell and every chunk sum unchanged: `make check-reductions`.
+Self-test of everything: `make test`. To check that the reductions (mirror, early cut, half-key
+pruning) leave every table cell and every chunk sum unchanged: `make check-reductions`.
 
 ## Long runs, checkpoints and splitting the work
 
