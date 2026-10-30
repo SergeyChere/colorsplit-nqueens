@@ -1,6 +1,8 @@
 # Results
 
-Every value below agrees with OEIS A000170.
+Every value below up to n = 27 agrees with OEIS A000170. Q(28) was not known before:
+
+**Q(28) = 2,564,269,152,506,723,832**
 
 ## Runs on one GPU
 
@@ -16,6 +18,7 @@ Software of the Colab runtime at the time of writing: NVIDIA driver 580.82.07, C
 | 25 | 2,207,893,435,808,352 | 6,289 s (1.75 h) | `colorsplit_v2.cu`, untuned settings |
 | 26 | 22,317,699,616,364,044 | 48,112 s (13.4 h) | `colorsplit_v2.cu`, tuned |
 | 27 | 234,907,967,154,122,528 | 62.2 h of computation | `colorsplit_v2.cu`, tuned |
+| 28 | 2,564,269,152,506,723,832 | 436.4 h of computation | `colorsplit.cu` (version 5), `-batch 8` |
 
 `gpu/colorsplit.cu` (version 4) on the same kind of GPU, 9 October 2026: Q(4) to Q(23) all equal
 to the known values; Q(22) in 20.5 s and Q(23) in 79.7 s, against 156.8 s for `colorsplit_v2.cu`
@@ -44,6 +47,45 @@ on a GPU:
 ```
 echo 0 > one.txt
 ./colorsplit_gpu 27 27 -side black -chunks one.txt        # chunk 0: 260013399880
+```
+
+## Q(28)
+
+Computed with `gpu/colorsplit.cu` (version 5) on one RTX PRO 6000 Blackwell in Google Colab,
+`-batch 8`, in October 2026: 436.4 hours of computation (18.2 days), in several Colab sessions,
+each resuming from the checkpoint file. Q(27) to Q(28) took 7.0 times longer, in line with the
+factor of 6 to 8 we measured on steps to even n.
+
+[`colorsplit_n28.ckpt`](colorsplit_n28.ckpt) is the checkpoint file of that run, in the same
+format as the Q(27) file (the milliseconds are the time of a batch divided by its 8 chunks).
+For even n every row set lies in chunks 0 to 2047, so chunks 2048 to 4095 have the sum 0.
+
+```
+python3 tools/verify.py total results/colorsplit_n28.ckpt
+sha256sum results/colorsplit_n28.ckpt   # 7289113b36701dd699d30f58f15069a4238049fec892e759171af5d013a81757
+```
+
+Checks:
+
+- all 4096 chunks present, each once, each marked `ok`; the exact sum is the value above;
+- divisible by 4 (Nielsen's theorem);
+- the ratio Q(n+1)/Q(n) went 9.70, 10.11, 10.53 from n = 24 to 27; Q(28)/Q(27) = 10.92 continues
+  this steady rise of about 0.4 per step;
+- the sum is 3.6 times below the largest signed 64-bit integer, so the 64-bit chunk sums
+  cannot have overflowed; the 32-bit table counters were guarded too, since version 5 stops with
+  an error if a counter could exceed 2^31, and the run never stopped for that reason;
+- independent recomputation of a random sample: 100 of the 2048 nonzero chunks, chosen with
+  `python3 tools/verify.py sample results/colorsplit_n28.ckpt --count 100 --seed 1921585467`.
+  The seed is the first 8 hex digits of the file's sha256 (`7289113b`), so the sample is fixed by
+  the result itself and anyone can draw it again. 50 chunks were recomputed with the table on
+  white (`-side white`) and 50 with the table on black (`-side black`), which are different code
+  paths from the main run: **RESULT PENDING**.
+
+Any chunk can be recomputed and compared, for example chunk 0:
+
+```
+echo 0 > one.txt
+./colorsplit_gpu 28 28 -side black -chunks one.txt        # chunk 0: 7780397743116
 ```
 
 ## Runs on rented CPU servers

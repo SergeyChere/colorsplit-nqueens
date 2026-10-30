@@ -2,11 +2,14 @@
 
 ColorSplit computes Q(n), the number of ways to place n non-attacking queens on an n × n
 board ([OEIS A000170](https://oeis.org/A000170)), exactly and without visiting the solutions
-one by one. On one GPU it computes Q(26) in 13.4 hours and recomputed the largest known value,
-Q(27) = 234,907,967,154,122,528, in 62 GPU-hours. On one CPU core it computes Q(21) in
-21 minutes, about 4 ns per solution.
+one by one. On one GPU it computed the previously unknown value
 
-The next goal is the unknown value **Q(28)**, estimated at 590–690 GPU-hours.
+**Q(28) = 2,564,269,152,506,723,832**
+
+in 436 GPU-hours, recomputed Q(27) = 234,907,967,154,122,528 in 62 GPU-hours and computes
+Q(26) in 13.4 hours. On one CPU core it computes Q(21) in 21 minutes, about 4 ns per solution.
+All 4096 partial sums of Q(27) and Q(28) are in [`results/`](results/), so any part of either
+result can be recomputed independently.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/figures/fig1-color-split-dark.svg">
@@ -15,8 +18,8 @@ The next goal is the unknown value **Q(28)**, estimated at 590–690 GPU-hours.
 
 ## Results
 
-All values agree with OEIS A000170. GPU: one NVIDIA RTX PRO 6000 Blackwell Server Edition
-(Google Colab); CPU: rented cloud servers (DigitalOcean).
+All values up to n = 27 agree with OEIS A000170; Q(28) was not known before. GPU: one NVIDIA
+RTX PRO 6000 Blackwell Server Edition (Google Colab); CPU: rented cloud servers (DigitalOcean).
 
 | n  | Q(n)                        | One GPU | Other runs |
 |----|-----------------------------|---------|------------|
@@ -26,10 +29,13 @@ All values agree with OEIS A000170. GPU: one NVIDIA RTX PRO 6000 Blackwell Serve
 | 25 | 2,207,893,435,808,352       | 1.75 h  | 33.5 h on a CPU server (Java) |
 | 26 | 22,317,699,616,364,044      | 13.4 h  | |
 | 27 | 234,907,967,154,122,528     | 62.2 h  | all 4096 partial sums in [`results/`](results/) |
+| 28 | 2,564,269,152,506,723,832   | 436.4 h | new; all 4096 partial sums in [`results/`](results/) |
 
 For comparison, the GPU solver of 2025 ([arXiv:2511.12009](https://arxiv.org/abs/2511.12009))
 needed 2.5 days on eight RTX 5090 GPUs for Q(26) (about 480 GPU-hours) and 28.4 days for Q(27)
-(about 5450 GPU-hours). Details of every run are in [`results/README.md`](results/README.md).
+(about 5450 GPU-hours), and estimated that earlier implementations would need decades for
+Q(28). Details of every run, and how Q(28) was checked, are in
+[`results/README.md`](results/README.md).
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/figures/fig5-gpu-hours-dark.svg">
@@ -97,7 +103,7 @@ tools/linear_laws.py      Lemma 2: no linear law beyond row and column sums for 
 tools/run_cpu_server.sh   build and run on a fresh Linux server
 tests/run_tests.sh        self-test (make test), about a minute, no GPU needed
 tests/check_reductions.sh each reduction switched off gives the same table cells and chunk sums
-results/                  the Q(27) checkpoint file with all 4096 partial sums, run details
+results/                  the Q(27) and Q(28) checkpoint files with all 4096 partial sums, run details
 docs/figures/             the figures of this page and of the paper
 ```
 
