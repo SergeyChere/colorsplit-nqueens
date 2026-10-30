@@ -69,17 +69,20 @@ Checks:
 
 - all 4096 chunks present, each once, each marked `ok`; the exact sum is the value above;
 - divisible by 4 (Nielsen's theorem);
-- the ratio Q(n+1)/Q(n) went 9.70, 10.11, 10.53 from n = 24 to 27; Q(28)/Q(27) = 10.92 continues
-  this steady rise of about 0.4 per step;
-- the sum is 3.6 times below the largest signed 64-bit integer, so the 64-bit chunk sums
-  cannot have overflowed; the 32-bit table counters were guarded too, since version 5 stops with
-  an error if a counter could exceed 2^31, and the run never stopped for that reason;
-- independent recomputation of a random sample: 100 of the 2048 nonzero chunks, chosen with
-  `python3 tools/verify.py sample results/colorsplit_n28.ckpt --count 100 --seed 1921585467`.
-  The seed is the first 8 hex digits of the file's sha256 (`7289113b`), so the sample is fixed by
-  the result itself and anyone can draw it again. 50 chunks were recomputed with the table on
-  white (`-side white`) and 50 with the table on black (`-side black`), which are different code
-  paths from the main run: **RESULT PENDING**.
+- the ratio Q(n)/Q(n−1) was 9.70, 10.11 and 10.53 for n = 25, 26 and 27; for n = 28 it is 10.92,
+  which continues this steady rise of about 0.4 per step;
+- the total is 3.6 times below the largest signed 64-bit integer, and the largest chunk sum is
+  6.0 · 10^15, so no 64-bit sum can have overflowed; the 32-bit table counters were guarded too,
+  since version 5 stops with an error if a counter could exceed 2^31, and the run never stopped
+  for that reason;
+- independent recomputation of a random sample of 50 of the 2048 nonzero chunks:
+  `python3 tools/verify.py sample results/colorsplit_n28.ckpt --count 100 --seed 1921585467`
+  draws 100 chunks, and the sample is every second one of them, starting with the first (chunks
+  39, 63, 70, …, 2011). The seed is the first 8 hex digits of the file's sha256 (`7289113b`), so
+  the sample is fixed by the result itself and anyone can draw it again. Each sampled chunk was
+  recomputed twice, with the table forced to white (`-side white`) and to black (`-side black`).
+  The main run chose the color with more rows, so every row set in the sample also went through
+  the code path the main run did not use: **RESULT PENDING**.
 
 Any chunk can be recomputed and compared, for example chunk 0:
 
@@ -150,4 +153,4 @@ placements W_R(C) behind one key. The cells are 32-bit counters, which overflow 
 The maximum grows by a factor of 2 to 3 every two steps of n, so it should stay below 10^5 at
 n = 28. An overflow could only lower a total (a counter wraps to a smaller value), and all totals
 for n ≤ 27 equal the known values. `gpu/colorsplit.cu` also stops with exit code 3 if a counter
-could exceed 2^31.
+could exceed 2^31; the Q(28) run never stopped for that reason.
