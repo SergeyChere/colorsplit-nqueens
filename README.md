@@ -21,15 +21,15 @@ these results can be recomputed independently.
 All values up to n = 27 agree with OEIS A000170; Q(28) was not known before. GPU: one NVIDIA
 RTX PRO 6000 Blackwell Server Edition (Google Colab); CPU: rented cloud servers (DigitalOcean).
 
-| n  | Q(n)                        | One GPU | Other runs |
-|----|-----------------------------|---------|------------|
-| 22 | 2,691,008,701,644           | 43 s    | CPU server (Java) |
-| 23 | 24,233,937,684,440          | 2.5 min | 72 min on 8 vCPUs (C) |
-| 24 | 227,514,171,973,736         | 21 min  | 22 h on 8 vCPUs (Java) |
-| 25 | 2,207,893,435,808,352       | 1.75 h  | 33.5 h on a CPU server (Java); all 4096 partial sums in [`results/`](results/) |
-| 26 | 22,317,699,616,364,044      | 13.4 h  | all 4096 partial sums in [`results/`](results/) |
-| 27 | 234,907,967,154,122,528     | 62.2 h  | all 4096 partial sums in [`results/`](results/) |
-| 28 | 2,564,269,152,506,723,832   | 436.4 h | new; all 4096 partial sums in [`results/`](results/) |
+| n  | Q(n)                        | One GPU | CPU                     | Partial sums |
+|----|-----------------------------|---------|-------------------------|--------------|
+| 22 | 2,691,008,701,644           | 43 s    | CPU server (Java)       | |
+| 23 | 24,233,937,684,440          | 2.5 min | 72 min on 8 vCPUs (C)   | |
+| 24 | 227,514,171,973,736         | 21 min  | 22 h on 8 vCPUs (Java)  | |
+| 25 | 2,207,893,435,808,352       | 1.75 h  | 33.5 h on a CPU server (Java) | [`colorsplit_n25.ckpt`](results/colorsplit_n25.ckpt) |
+| 26 | 22,317,699,616,364,044      | 13.4 h  |                         | [`colorsplit_n26.ckpt`](results/colorsplit_n26.ckpt) |
+| 27 | 234,907,967,154,122,528     | 62.2 h  |                         | [`colorsplit_n27.ckpt`](results/colorsplit_n27.ckpt) |
+| 28 | 2,564,269,152,506,723,832 (new) | 436.4 h |                     | [`colorsplit_n28.ckpt`](results/colorsplit_n28.ckpt) |
 
 For comparison, the GPU solver of 2025 ([arXiv:2511.12009](https://arxiv.org/abs/2511.12009))
 needed 2.5 days on eight RTX 5090 GPUs for Q(26) (about 480 GPU-hours) and 28.4 days for Q(27)
