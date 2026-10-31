@@ -20,5 +20,5 @@ abstract: >-
   Exact counting of the solutions Q(n) of the n-queens problem by splitting the board into
   white and black squares: the two colors interact only through rows and columns, so Q(n)
   is a sum of table lookups on an exact key. CPU versions in C and Java, a CUDA version for
-  GPUs, tools to check and merge checkpoint files, and the 4096 partial sums of Q(27) and of
+  GPUs, tools to check and merge checkpoint files, and the 4096 partial sums of Q(25), Q(26), Q(27) and of
   the new value Q(28) = 2564269152506723832.

@@ -8,8 +8,8 @@ one by one. On one GPU it computed the previously unknown value
 
 in 436 GPU-hours, recomputed Q(27) = 234,907,967,154,122,528 in 62 GPU-hours and computes
 Q(26) in 13.4 hours. On one CPU core it computes Q(21) in 21 minutes, about 4 ns per solution.
-All 4096 partial sums of Q(27) and Q(28) are in [`results/`](results/), so any part of either
-result can be recomputed independently.
+All 4096 partial sums of Q(25), Q(26), Q(27) and Q(28) are in [`results/`](results/), so any part of
+these results can be recomputed independently.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/figures/fig1-color-split-dark.svg">
@@ -26,8 +26,8 @@ RTX PRO 6000 Blackwell Server Edition (Google Colab); CPU: rented cloud servers 
 | 22 | 2,691,008,701,644           | 43 s    | CPU server (Java) |
 | 23 | 24,233,937,684,440          | 2.5 min | 72 min on 8 vCPUs (C) |
 | 24 | 227,514,171,973,736         | 21 min  | 22 h on 8 vCPUs (Java) |
-| 25 | 2,207,893,435,808,352       | 1.75 h  | 33.5 h on a CPU server (Java) |
-| 26 | 22,317,699,616,364,044      | 13.4 h  | |
+| 25 | 2,207,893,435,808,352       | 1.75 h  | 33.5 h on a CPU server (Java); all 4096 partial sums in [`results/`](results/) |
+| 26 | 22,317,699,616,364,044      | 13.4 h  | all 4096 partial sums in [`results/`](results/) |
 | 27 | 234,907,967,154,122,528     | 62.2 h  | all 4096 partial sums in [`results/`](results/) |
 | 28 | 2,564,269,152,506,723,832   | 436.4 h | new; all 4096 partial sums in [`results/`](results/) |
 
@@ -103,7 +103,7 @@ tools/linear_laws.py      Lemma 2: no linear law beyond row and column sums for 
 tools/run_cpu_server.sh   build and run on a fresh Linux server
 tests/run_tests.sh        self-test (make test), about a minute, no GPU needed
 tests/check_reductions.sh each reduction switched off gives the same table cells and chunk sums
-results/                  the Q(27) and Q(28) checkpoint files with all 4096 partial sums, run details
+results/                  checkpoint files of Q(25) to Q(28) with all 4096 partial sums each, run details
 docs/figures/             the figures of this page and of the paper
 ```
 

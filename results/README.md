@@ -49,6 +49,18 @@ echo 0 > one.txt
 ./colorsplit_gpu 27 27 -side black -chunks one.txt        # chunk 0: 260013399880
 ```
 
+[`colorsplit_n25.ckpt`](colorsplit_n25.ckpt) and [`colorsplit_n26.ckpt`](colorsplit_n26.ckpt) are the
+checkpoint files of the Q(25) and Q(26) runs in the table above, in the same format. Each has all
+4096 chunks, adds up exactly to the known value, and the compute time in the file (1.75 h and
+13.36 h) matches the table. Some chunks have the sum 0: for even n chunks 2048 to 4095, which hold
+no row set the program uses, and for odd n a few of the last chunks (11 for n = 25, 8 for n = 27),
+whose row sets put nearly all of the last 12 rows on white squares; no solution has such a row set.
+
+```
+python3 tools/verify.py total results/colorsplit_n25.ckpt   # 2,207,893,435,808,352
+python3 tools/verify.py total results/colorsplit_n26.ckpt   # 22,317,699,616,364,044
+```
+
 ## Q(28)
 
 Computed with `gpu/colorsplit.cu` (version 5) on one RTX PRO 6000 Blackwell in Google Colab,
