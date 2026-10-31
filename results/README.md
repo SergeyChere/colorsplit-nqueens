@@ -94,7 +94,12 @@ Checks:
   the sample is fixed by the result itself and anyone can draw it again. Each sampled chunk was
   recomputed twice, with the table forced to white (`-side white`) and to black (`-side black`).
   The main run chose the color with more rows, so every row set in the sample also went through
-  the code path the main run did not use: **RESULT PENDING**.
+  the code path the main run did not use. The list is [`sample28.txt`](sample28.txt). With the table
+  on white all 50 sums are identical to those of the main run
+  ([`colorsplit_n28_sideW.ckpt`](colorsplit_n28_sideW.ckpt), 11.3 GPU-hours); with the table on
+  black: **RESULT PENDING** (the first 12 chunks are identical so far). The black side runs about
+  1.8 to 1.9 times slower than the white side on this board, while on boards up to n = 20 the two
+  sides take about the same time; we do not yet know why. This affects only the running time.
 
 Any chunk can be recomputed and compared, for example chunk 0:
 

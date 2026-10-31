@@ -85,7 +85,9 @@ Only about 18% of the row sets R (at n = 20) can therefore contribute.
 - rows enumerated from the center of the board outwards;
 - a compact table indexed by the combinatorial ranks of the even- and odd-column halves of the
   key (about 30 times smaller than a table with 2^n cells at n = 28);
-- the color with more rows goes into the table.
+- the color with more rows goes into the table (this saved 5 to 15% in our CPU measurements; on the
+  GPU at n = 28 the table on black took much longer, for reasons we do not yet understand, so the
+  best side on large boards is an open question).
 
 ## Repository layout
 
