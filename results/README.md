@@ -96,10 +96,11 @@ Checks:
   The main run chose the color with more rows, so every row set in the sample also went through
   the code path the main run did not use. The list is [`sample28.txt`](sample28.txt). With the table
   on white all 50 sums are identical to those of the main run
-  ([`colorsplit_n28_sideW.ckpt`](colorsplit_n28_sideW.ckpt), 11.3 GPU-hours); with the table on
-  black: **RESULT PENDING** (the first 12 chunks are identical so far). The black side runs about
-  1.8 to 1.9 times slower than the white side on this board, while on boards up to n = 20 the two
-  sides take about the same time; we do not yet know why. This affects only the running time.
+  ([`colorsplit_n28_sideW.ckpt`](colorsplit_n28_sideW.ckpt), 11.3 GPU-hours), and with the table on
+  black too ([`colorsplit_n28_sideB.ckpt`](colorsplit_n28_sideB.ckpt), 18.6 GPU-hours). The black
+  side took about 1.6 times as long as the white side on this board (1.9 times on the 8 heaviest
+  chunks), while on boards up to n = 20 the two sides take about the same time; we do not yet know
+  why. This affects only the running time, not the sums.
 
 Any chunk can be recomputed and compared, for example chunk 0:
 
