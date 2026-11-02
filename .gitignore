@@ -18,3 +18,5 @@ colorsplit.pid
 sample*.txt
 !results/sample28.txt
 part*.txt
+__pycache__/
+*.pyc
