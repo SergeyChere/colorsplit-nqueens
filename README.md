@@ -31,10 +31,10 @@ RTX PRO 6000 Blackwell Server Edition (Google Colab); CPU: rented cloud servers 
 | 27 | 234,907,967,154,122,528     | 62.2 h  |                         | [`colorsplit_n27.ckpt`](results/colorsplit_n27.ckpt) |
 | 28 | 2,564,269,152,506,723,832 (new) | 436.4 h |                     | [`colorsplit_n28.ckpt`](results/colorsplit_n28.ckpt) |
 
-For comparison, the GPU solver of 2025 ([arXiv:2511.12009](https://arxiv.org/abs/2511.12009))
+For comparison, the GPU solver of 2025 by Yao and Li ([arXiv:2511.12009](https://arxiv.org/abs/2511.12009))
 needed 2.5 days on eight RTX 5090 GPUs for Q(26) (about 480 GPU-hours) and 28.4 days for Q(27)
-(about 5450 GPU-hours), and estimated that earlier implementations would need decades for
-Q(28). Details of every run, and how Q(28) was checked, are in
+(about 5450 GPU-hours), and projected about 11 months on eight RTX 5090 GPUs for Q(28), roughly
+64,000 GPU-hours. Details of every run, and how Q(28) was checked, are in
 [`results/README.md`](results/README.md).
 
 <picture>

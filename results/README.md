@@ -53,8 +53,9 @@ echo 0 > one.txt
 checkpoint files of the Q(25) and Q(26) runs in the table above, in the same format. Each has all
 4096 chunks, adds up exactly to the known value, and the compute time in the file (1.75 h and
 13.36 h) matches the table. Some chunks have the sum 0: for even n chunks 2048 to 4095, which hold
-no row set the program uses, and for odd n a few of the last chunks (11 for n = 25, 8 for n = 27),
-whose row sets put nearly all of the last 12 rows on white squares; no solution has such a row set.
+no row set the program uses, and a few of the last chunks below them (2045 and 2047 for n = 26; 11
+chunks for n = 25 and 8 for n = 27), whose row sets put nearly all of the last 12 rows on white
+squares; no solution has such a row set.
 
 ```
 python3 tools/verify.py total results/colorsplit_n25.ckpt   # 2,207,893,435,808,352
