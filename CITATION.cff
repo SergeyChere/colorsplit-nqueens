@@ -6,8 +6,8 @@ authors:
   - given-names: "Sergii"
     family-names: "Cherepanov"
 license: MIT
-version: "1.1.0"
-date-released: "2026-10-30"
+version: "1.2.0"
+date-released: "2026-11-02"
 repository-code: "https://github.com/SergeyChere/colorsplit-nqueens"
 keywords:
   - n-queens

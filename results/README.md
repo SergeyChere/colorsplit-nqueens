@@ -103,7 +103,7 @@ Checks:
   why. This affects only the running time, not the sums.
 - recomputation of five light chunks (1983, 2011, 2018, 2045 and 2047) with the C version on a
   CPU, a separate program on different hardware: all five sums are identical
-  ([`colorsplit_n28_cpu.ckpt`](colorsplit_n28_cpu.ckpt); about 15 minutes for each of the three
+  ([`colorsplit_n28_cpu.ckpt`](colorsplit_n28_cpu.ckpt); 10 to 15 minutes for each of the three
   larger ones on one core of an Intel Xeon). To repeat it, copy `colorsplit_n28.ckpt` without the
   lines of these chunks and run `./bin/colorsplit 28 28 -t 2` in the same folder: the program
   resumes from the file and computes only the missing chunks.

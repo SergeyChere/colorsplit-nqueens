@@ -84,7 +84,7 @@ Only about 18% of the row sets R (at n = 20) can therefore contribute.
   no table key has that half;
 - rows enumerated from the center of the board outwards;
 - a compact table indexed by the combinatorial ranks of the even- and odd-column halves of the
-  key (about 30 times smaller than a table with 2^n cells at n = 28);
+  key (23 times fewer cells than a table with 2^n cells at n = 28, 30 times less memory);
 - the color with more rows goes into the table (this saved 5 to 15% in our CPU measurements; on the
   GPU at n = 28 the table on black took much longer, for reasons we do not yet understand, so the
   best side on large boards is an open question).
@@ -107,6 +107,7 @@ tests/run_tests.sh        self-test (make test), about a minute, no GPU needed
 tests/check_reductions.sh each reduction switched off gives the same table cells and chunk sums
 results/                  checkpoint files of Q(25) to Q(28) with all 4096 partial sums each, run details
 docs/figures/             the figures of this page and of the paper
+paper/                    the paper (PDF and LaTeX source)
 ```
 
 ## Quick start
@@ -197,7 +198,8 @@ their results.
 ## Citation
 
 The paper *ColorSplit: Counting n-Queens Solutions by Splitting the Board into Colors* is in
-preparation; a link will be added here. Until then, please cite this repository
+[`paper/ColorSplit.pdf`](paper/ColorSplit.pdf) (LaTeX source in [`paper/`](paper/)); links to its
+permanent copies will be added here. Until then, please cite this repository
 ([`CITATION.cff`](CITATION.cff)).
 
 ## License

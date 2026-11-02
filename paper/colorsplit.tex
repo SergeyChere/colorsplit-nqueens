@@ -1,0 +1,55 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[sc]{mathpazo}\linespread{1.05}
+\renewcommand{\ttdefault}{txtt}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage{fancyvrb}
+\usepackage[skip=6pt]{caption}
+\usepackage{microtype}
+\usepackage{newunicodechar}
+\usepackage[hidelinks]{hyperref}
+\setlist{itemsep=2pt,topsep=4pt}
+\setlength{\parskip}{4pt}
+\setlength{\emergencystretch}{2em}
+
+% Unicode characters used in the text
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{±}{\ensuremath{\pm}}
+\newunicodechar{−}{\ensuremath{-}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{←}{\ensuremath{\leftarrow}}
+\newunicodechar{↔}{\ensuremath{\leftrightarrow}}
+\newunicodechar{λ}{\ensuremath{\lambda}}
+\newunicodechar{σ}{\ensuremath{\sigma}}
+\newunicodechar{Σ}{\ensuremath{\Sigma}}
+\newunicodechar{′}{\ensuremath{'}}
+\newunicodechar{√}{\ensuremath{\sqrt{\phantom{x}}\!\!}}
+\newunicodechar{⌊}{\ensuremath{\lfloor}}
+\newunicodechar{⌋}{\ensuremath{\rfloor}}
+\newunicodechar{∅}{\ensuremath{\emptyset}}
+\newunicodechar{∪}{\ensuremath{\cup}}
+\newunicodechar{⊆}{\ensuremath{\subseteq}}
+\newunicodechar{≠}{\ensuremath{\neq}}
+\newunicodechar{·}{\ensuremath{\cdot}}
+\newunicodechar{…}{\ldots}
+\newunicodechar{ᶜ}{\ensuremath{^{c}}}
+
+% box for the pseudocode
+\newenvironment{algobox}{\par\medskip\noindent\begin{minipage}{\textwidth}\hrule\smallskip}{\smallskip\hrule\end{minipage}\par\medskip}
+
+\title{ColorSplit: Counting $n$-Queens Solutions\\by Splitting the Board into Colors}
+\author{Sergii Cherepanov\\[2pt]{\normalsize Independent Researcher, Canada}\\{\normalsize\href{mailto:che.sergii@gmail.com}{\texttt{che.sergii@gmail.com}}}}
+\date{November 2026}
+
+\begin{document}
+\maketitle
+\input{body}
+\end{document}
