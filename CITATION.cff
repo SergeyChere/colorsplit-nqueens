@@ -8,6 +8,7 @@ authors:
 license: MIT
 version: "1.2.0"
 date-released: "2026-11-02"
+doi: "10.5281/zenodo.23901119"
 repository-code: "https://github.com/SergeyChere/colorsplit-nqueens"
 keywords:
   - n-queens
@@ -22,3 +23,14 @@ abstract: >-
   is a sum of table lookups on an exact key. CPU versions in C and Java, a CUDA version for
   GPUs, tools to check and merge checkpoint files, and the 4096 partial sums of Q(25), Q(26), Q(27) and of
   the new value Q(28) = 2564269152506723832.
+preferred-citation:
+  type: article
+  title: "ColorSplit: Counting n-Queens Solutions by Splitting the Board into Colors"
+  authors:
+    - given-names: "Sergii"
+      family-names: "Cherepanov"
+  year: 2026
+  publisher:
+    name: "Zenodo"
+  doi: "10.5281/zenodo.23901119"
+  url: "https://doi.org/10.5281/zenodo.23901119"

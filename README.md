@@ -1,5 +1,7 @@
 # ColorSplit: counting n-queens solutions by splitting the board into colors
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23901119.svg)](https://doi.org/10.5281/zenodo.23901119)
+
 ColorSplit computes Q(n), the number of ways to place n non-attacking queens on an n × n
 board ([OEIS A000170](https://oeis.org/A000170)), exactly and without visiting the solutions
 one by one. On one GPU it computed the previously unknown value
@@ -197,10 +199,13 @@ their results.
 
 ## Citation
 
-The paper *ColorSplit: Counting n-Queens Solutions by Splitting the Board into Colors* is in
-[`paper/ColorSplit.pdf`](paper/ColorSplit.pdf) (LaTeX source in [`paper/`](paper/)); links to its
-permanent copies will be added here. Until then, please cite this repository
-([`CITATION.cff`](CITATION.cff)).
+Sergii Cherepanov. *ColorSplit: Counting n-Queens Solutions by Splitting the Board into Colors.*
+Zenodo, 2026. [doi:10.5281/zenodo.23901119](https://doi.org/10.5281/zenodo.23901119)
+
+The paper is also in [`paper/ColorSplit.pdf`](paper/ColorSplit.pdf), with its LaTeX source in
+[`paper/`](paper/). The DOI above always points to the latest version of the Zenodo record; the
+first version is [doi:10.5281/zenodo.23901120](https://doi.org/10.5281/zenodo.23901120).
+See also [`CITATION.cff`](CITATION.cff).
 
 ## License
 
